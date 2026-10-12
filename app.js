@@ -5,7 +5,7 @@
   public API that returns ONLY aggregate turnout data. Never expose voter rows,
   serial numbers, candidate totals, app secrets, or Microsoft Graph tokens here.
 */
-const DEMO_MODE = true;
+const DEMO_MODE = false;
 const REFRESH_MS = 30000;
 const PROGRAMS = ["DED","DEP","DEI","DLR","DBN","DSB"];
 const demoData = {
