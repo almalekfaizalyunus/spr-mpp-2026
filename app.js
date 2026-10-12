@@ -44,12 +44,22 @@ function render(data){
   }).join("");
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
-async function loadDashboard(){
-  if(DEMO_MODE){render(demoData);return;}
-  // TODO: const res = await fetch("YOUR_PUBLIC_AGGREGATE_API_URL",{cache:"no-store"});
-  // if(!res.ok) throw new Error("API error");
-  // render(await res.json());
-  // API must return only aggregate totals; no voter identifiers or candidate results.
+async function loadDashboard() {
+  try {
+    const res = await fetch("./dashboard.json", {
+      cache: "no-store"
+    });
+
+    if (!res.ok) {
+      throw new Error("Gagal membaca dashboard.json: HTTP " + res.status);
+    }
+
+    const data = await res.json();
+
+    render(data);
+  } catch (error) {
+    console.error("Dashboard error:", error);
+  }
 }
 loadDashboard();
 setInterval(()=>loadDashboard().catch(()=>{}),REFRESH_MS);
