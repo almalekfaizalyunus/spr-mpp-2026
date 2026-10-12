@@ -80,5 +80,7 @@ async function loadDashboard() {
     console.error("Dashboard error:", error);
   }
 }
-loadDashboard();
+document.addEventListener("DOMContentLoaded", () => {
+  loadDashboard();
+});
 setInterval(()=>loadDashboard().catch(()=>{}),REFRESH_MS);
