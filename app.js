@@ -36,9 +36,49 @@ function render(data) {
   document.getElementById("updatedAt").textContent =
     "Kemas kini: " + new Date().toLocaleString("ms-MY");
 
-  const rows = (data.program || []).filter(p =>
+const rows = (data.program || []).filter(p =>
     PROGRAMS.includes(p.nama)
-  );
+);
+
+document.getElementById("programGrid").innerHTML = rows.map(p => {
+    const programTotal = Number(p.jumlah) || 0;
+    const programVoted = Number(p.telahMengundi) || 0;
+
+    const programRemaining = Math.max(
+        0,
+        programTotal - programVoted
+    );
+
+    const programRate = programTotal > 0
+        ? (programVoted / programTotal) * 100
+        : 0;
+
+    const progress = Math.min(
+        100,
+        Math.max(0, programRate)
+    );
+
+    return `<article class="program-card">
+        <div class="program-top">
+            <div class="program-code">${escapeHtml(p.nama)}</div>
+            <div class="program-rate">${programRate.toFixed(1)}%</div>
+        </div>
+
+        <div class="program-meta">
+            <span>${fmt(programVoted)} telah mengundi</span>
+            <span>${fmt(programTotal)} pengundi</span>
+        </div>
+
+        <div class="bar">
+            <span style="width:${progress}%"></span>
+        </div>
+
+        <div class="program-meta">
+            <span>${fmt(programRemaining)} belum mengundi</span>
+            <span>Kehadiran</span>
+        </div>
+    </article>`;
+}).join("");
 
   document.getElementById("programGrid").innerHTML = rows.map(p => {
     const programTotal = Number(p.jumlah) || 0;
