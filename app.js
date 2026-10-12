@@ -20,26 +20,43 @@ const demoData = {
 };
 const fmt = n => Number(n).toLocaleString("ms-MY");
 const pct = (n,d) => d ? Math.min(100,Math.max(0,n/d*100)) : 0;
-function render(data){
-  const total = Number(data.totalVoters)||0;
-  const voted = Number(data.voted)||0;
-  const remaining = Math.max(0,total-voted);
-  const rate = pct(voted,total);
-  document.getElementById("totalVoters").textContent=fmt(total);
-  document.getElementById("voted").textContent=fmt(voted);
-  document.getElementById("notVoted").textContent=fmt(remaining);
-  document.getElementById("rate").textContent=rate.toFixed(2)+"%";
-  document.getElementById("overallRate").textContent=rate.toFixed(1)+"%";
-  document.getElementById("overallProgress").style.width=rate+"%";
-  document.getElementById("updatedAt").textContent="Kemas kini: "+new Date(data.updatedAt||Date.now()).toLocaleString("ms-MY");
-  const rows = (data.programs||[]).filter(p=>PROGRAMS.includes(p.code));
-  document.getElementById("programGrid").innerHTML=rows.map(p=>{
-    const r=pct(Number(p.voted)||0,Number(p.total)||0);
+function render(data) {
+  const total = Number(data.totalPengundi) || 0;
+  const voted = Number(data.telahMengundi) || 0;
+  const remaining = Number(data.belumMengundi) || Math.max(0, total - voted);
+  const rate = Number(data.peratusKehadiran) || 0;
+
+  document.getElementById("totalVoters").textContent = fmt(total);
+  document.getElementById("voted").textContent = fmt(voted);
+  document.getElementById("notVoted").textContent = fmt(remaining);
+  document.getElementById("rate").textContent = rate.toFixed(2) + "%";
+  document.getElementById("overallRate").textContent = rate.toFixed(1) + "%";
+  document.getElementById("overallProgress").style.width = rate + "%";
+
+  document.getElementById("updatedAt").textContent =
+    "Kemas kini: " + new Date().toLocaleString("ms-MY");
+
+  const rows = (data.program || []).filter(p =>
+    PROGRAMS.includes(p.nama)
+  );
+
+  document.getElementById("programGrid").innerHTML = rows.map(p => {
+    const programTotal = Number(p.jumlah) || 0;
+
     return `<article class="program-card">
-      <div class="program-top"><div class="program-code">${escapeHtml(p.code)}</div><div class="program-rate">${r.toFixed(1)}%</div></div>
-      <div class="program-meta"><span>${fmt(p.voted)} telah mengundi</span><span>${fmt(p.total)} pengundi</span></div>
-      <div class="bar"><span style="width:${r}%"></span></div>
-      <div class="program-meta"><span>${fmt(Math.max(0,(Number(p.total)||0)-(Number(p.voted)||0)))} belum mengundi</span><span>Kehadiran</span></div>
+      <div class="program-top">
+        <div class="program-code">${escapeHtml(p.nama)}</div>
+        <div class="program-rate">—</div>
+      </div>
+      <div class="program-meta">
+        <span>Belum tersedia</span>
+        <span>${fmt(programTotal)} pengundi</span>
+      </div>
+      <div class="bar"><span style="width:0%"></span></div>
+      <div class="program-meta">
+        <span>Data kehadiran program belum tersedia</span>
+        <span>Kehadiran</span>
+      </div>
     </article>`;
   }).join("");
 }
