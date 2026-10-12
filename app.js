@@ -53,11 +53,6 @@ document.getElementById("programGrid").innerHTML = rows.map(p => {
         ? (programVoted / programTotal) * 100
         : 0;
 
-    const progress = Math.min(
-        100,
-        Math.max(0, programRate)
-    );
-
     return `<article class="program-card">
         <div class="program-top">
             <div class="program-code">${escapeHtml(p.nama)}</div>
@@ -70,7 +65,7 @@ document.getElementById("programGrid").innerHTML = rows.map(p => {
         </div>
 
         <div class="bar">
-            <span style="width:${progress}%"></span>
+            <span style="width:${Math.min(100, programRate)}%"></span>
         </div>
 
         <div class="program-meta">
@@ -79,26 +74,6 @@ document.getElementById("programGrid").innerHTML = rows.map(p => {
         </div>
     </article>`;
 }).join("");
-
-  document.getElementById("programGrid").innerHTML = rows.map(p => {
-    const programTotal = Number(p.jumlah) || 0;
-
-    return `<article class="program-card">
-      <div class="program-top">
-        <div class="program-code">${escapeHtml(p.nama)}</div>
-        <div class="program-rate">—</div>
-      </div>
-      <div class="program-meta">
-        <span>Belum tersedia</span>
-        <span>${fmt(programTotal)} pengundi</span>
-      </div>
-      <div class="bar"><span style="width:0%"></span></div>
-      <div class="program-meta">
-        <span>Data kehadiran program belum tersedia</span>
-        <span>Kehadiran</span>
-      </div>
-    </article>`;
-  }).join("");
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 async function loadDashboard() {
