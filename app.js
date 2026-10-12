@@ -73,6 +73,8 @@ async function loadDashboard() {
 
     const data = await res.json();
 
+    console.log("Data dashboard:", data);
+
     render(data);
   } catch (error) {
     console.error("Dashboard error:", error);
