@@ -96,7 +96,10 @@ async function loadDashboard() {
   }
 }
 document.addEventListener("DOMContentLoaded", () => {
-  // Auto-refresh dashboard setiap 5 minit
-setInterval(() => {
+    // Auto-refresh dashboard setiap 5 minit
+    setInterval(() => {
+        loadDashboard();
+    }, 3 * 60 * 1000);
+
     loadDashboard();
-}, 3 * 60 * 1000);
+});
