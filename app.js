@@ -96,10 +96,11 @@ async function loadDashboard() {
   }
 }
 document.addEventListener("DOMContentLoaded", () => {
-    // Auto-refresh dashboard setiap 5 minit
+    // Paparkan data sebaik sahaja halaman dibuka
+    loadDashboard();
+
+    // Kemas kini data setiap 3 minit
     setInterval(() => {
         loadDashboard();
     }, 3 * 60 * 1000);
-
-    loadDashboard();
 });
