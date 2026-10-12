@@ -77,23 +77,28 @@ document.getElementById("programGrid").innerHTML = rows.map(p => {
 }
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 async function loadDashboard() {
-  try {
-    const res = await fetch("./dashboard.json", {
-      cache: "no-store"
-    });
+    try {
+        const url = "./dashboard.json?t=" + Date.now();
 
-    if (!res.ok) {
-      throw new Error("Gagal membaca dashboard.json: HTTP " + res.status);
+        const res = await fetch(url, {
+            cache: "no-store"
+        });
+
+        if (!res.ok) {
+            throw new Error(
+                "Gagal membaca dashboard.json: HTTP " + res.status
+            );
+        }
+
+        const data = await res.json();
+
+        console.log("Data dashboard terkini:", data);
+
+        render(data);
+
+    } catch (error) {
+        console.error("Dashboard error:", error);
     }
-
-    const data = await res.json();
-
-    console.log("Data dashboard:", data);
-
-    render(data);
-  } catch (error) {
-    console.error("Dashboard error:", error);
-  }
 }
 document.addEventListener("DOMContentLoaded", () => {
     // Paparkan data sebaik sahaja halaman dibuka
