@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ms">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>SPR MPP 2026 | Live Turnout</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand-mark">MPP<span>26</span></div>
+    <div>
+      <div class="eyebrow">TVETMARA PASIR MAS</div>
+      <h1>SPR MPP 2026</h1>
+      <p class="subtitle">Paparan Kehadiran Pengundi • Live Update</p>
+    </div>
+    <div class="live-pill"><span class="pulse"></span> STATUS PENGUNDIAN</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">DASHBOARD RASMI</p>
+        <h2>Suara Anda,<br><span>Penentu Masa Depan.</span></h2>
+        <p class="muted">Statistik kehadiran pengundi dikemas kini secara berkala.</p>
+      </div>
+      <div class="hero-side">
+        <div class="big-number" id="overallRate">—%</div>
+        <div class="muted">Kehadiran keseluruhan</div>
+        <div class="progress"><span id="overallProgress"></span></div>
+        <div class="small muted" id="updatedAt">Menunggu sambungan data…</div>
+      </div>
+    </section>
+
+    <section class="stats-grid" aria-label="Statistik keseluruhan">
+      <article class="stat-card"><div class="stat-label">Jumlah Pengundi</div><div class="stat-value" id="totalVoters">854</div><div class="stat-note">Pengundi berdaftar</div></article>
+      <article class="stat-card"><div class="stat-label">Telah Mengundi</div><div class="stat-value green" id="voted">—</div><div class="stat-note">Rekod sah diproses</div></article>
+      <article class="stat-card"><div class="stat-label">Belum Mengundi</div><div class="stat-value amber" id="notVoted">—</div><div class="stat-note">Baki pengundi</div></article>
+      <article class="stat-card"><div class="stat-label">Kehadiran</div><div class="stat-value" id="rate">—%</div><div class="stat-note">Peratus pengundi hadir</div></article>
+    </section>
+
+    <section class="section-head">
+      <div><p class="eyebrow">PECAHAN PROGRAM</p><h2>Kehadiran Mengikut Program</h2></div>
+      <span class="tag">6 PROGRAM</span>
+    </section>
+    <section class="program-grid" id="programGrid"></section>
+
+    <section class="notice">
+      <div class="notice-icon">i</div>
+      <div><strong>Keputusan calon belum dipaparkan.</strong><p>Jumlah undi dan kedudukan calon hanya akan diumumkan selepas pengundian ditutup dan keputusan disahkan oleh pentadbir.</p></div>
+    </section>
+  </main>
+
+  <footer>
+    <span>SPR MPP 2026 • TVETMARA Pasir Mas</span>
+    <span>Maklumat peribadi pengundi tidak dipaparkan.</span>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>
