@@ -78,7 +78,7 @@ document.getElementById("programGrid").innerHTML = rows.map(p => {
 function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
 async function loadDashboard() {
     try {
-        const url = "./dashboard.json?t=" + Date.now();
+        const url = "https://raw.githubusercontent.com/almalekfaizalyunus/spr-mpp-data/main/dashboard.json?t=" + Date.now();
 
         const res = await fetch(url, {
             cache: "no-store"
