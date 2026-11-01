@@ -107,5 +107,5 @@ document.addEventListener("DOMContentLoaded", () => {
     // Kemas kini data setiap 3 minit
     setInterval(() => {
         loadDashboard();
-    }, 1 * 60 * 1000);
+    }, 3 * 60 * 1000);
 });
